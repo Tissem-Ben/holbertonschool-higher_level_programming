@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" the interpreter for the script."""
+"""Shebang line indicating the interpreter for the script."""
 
 
 class Rectangle:
