@@ -1,5 +1,9 @@
 #!/usr/bin/python3
+"""Shebang line indicating the interpreter for the script."""
+
+
 def read_file(filename=""):
-    """Reads a text file (UTF8) and prints it to stdout."""
-    with open(filename, 'r', encoding='utf-8') as file:
-        print(file.read(), end="")
+    """Function that read a text file"""
+    with open(filename, "r", encoding="UTF8",) as file:
+        content = file.read()
+        print(content, end="")
