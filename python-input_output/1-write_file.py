@@ -1,5 +1,8 @@
 #!/usr/bin/python3
+"""Shebang line indicating the interpreter for the script."""
+
+
 def write_file(filename="", text=""):
-    """a string to a text file and returns the number of characters written."""
-    with open(filename, "w", encoding="utf-8") as f:
-        return f.write(text)
+    """Function that read a text file"""
+    with open(filename, "w", encoding="UTF8",) as file:
+        return (file.write(text))
