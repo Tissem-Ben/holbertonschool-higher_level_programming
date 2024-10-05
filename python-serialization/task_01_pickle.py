@@ -1,48 +1,32 @@
+#!/usr/bin/env python3
+"""Shebang line indicating the interpreter for the script."""
+
+
 import pickle
 
 
 class CustomObject:
-    def __init__(self, name, age, student):
-        """
-        Initialize CustomObject with name, age, and student attributes.
-        """
+    def __init__(self, name, age, is_student):
         self.name = name
         self.age = age
-        self.student = student
+        self.is_student = is_student
 
     def display(self):
-        """Print object attributes."""
-        print(f"Name: {self.name}")
-        print(f"Age: {self.age}")
-        print(f"Is Student: {self.student}")
+        print("Name: {}".format(self.name))
+        print("Age: {}".format(self.age))
+        print("Is Student: {}".format(self.is_student))
 
-    def serialize(self, file):
-        """
-        Serialize the object and save to a file.
-
-        Parameters:
-        file (str): File to save the object.
-        """
+    def serialize(self, filename):
         try:
-            with open(file, 'wb') as f:
-                pickle.dump(self, f)
+            with open(filename, "wb") as file:
+                pickle.dump(self, file)
         except Exception as e:
-            print(f"Error saving object: {e}")
+            return None
 
     @classmethod
-    def deserialize(cls, file):
-        """
-        Load and deserialize an object from a file.
-
-        Parameters:
-        file (str): File to load from.
-
-        Returns:
-        CustomObject or None if an error occurs.
-        """
+    def deserialize(cls, filename):
         try:
-            with open(file, 'rb') as f:
-                return pickle.load(f)
+            with open(filename, "rb") as file:
+                return pickle.load(file)
         except Exception as e:
-            print(f"Error loading object: {e}")
             return None
