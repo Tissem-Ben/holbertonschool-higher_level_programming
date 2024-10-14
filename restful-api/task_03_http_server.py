@@ -1,37 +1,23 @@
 #!/usr/bin/env python3
-import http.server
-import json
+"""Shebang line indicating the interpreter for the script."""
+
+import xml.etree.ElementTree as ET
 
 
-class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
+def serialize_to_xml(dictionary, filename):
+    root = ET.Element("data")
+    for key, value in dictionary.items():
+        child = ET.SubElement(root, key)
+        child.text = str(value)
 
-    def do_GET(self):
-        if self.path == '/':
-            self.send_response(200)
-            self.send_header("Content-type", "text/plain")
-            self.end_headers()
-            self.wfile.write(b"Hello, this is a simple API!")
-        elif self.path == '/data':
-            self.send_response(200)
-            self.send_header("Content-type", "application/json")
-            self.end_headers()
-            data = {"name": "John", "age": 30, "city": "New York"}
-            self.wfile.write(json.dumps(data).encode())
-        elif self.path == '/status':
-            self.send_response(200)
-            self.send_header("Content-type", "application/json")
-            self.end_headers()
-            status = {"status": "OK"}
-            self.wfile.write(json.dumps(status).encode())
-        else:
-            self.send_response(404)
-            self.send_header("Content-type", "text/plain")
-            self.end_headers()
-            self.wfile.write(b"Endpoint not found")
+    tree = ET.ElementTree(root)
+    tree.write(filename, encoding='utf-8', xml_declaration=True)
 
 
-if __name__ == "__main__":
-    server_address = ('', 8000)
-    httpd = http.server.HTTPServer(server_address, SimpleHTTPRequestHandler)
-    print("Server running on port 8000...")
-    httpd.serve_forever()
+def deserialize_from_xml(filename):
+    tree = ET.parse(filename)
+    root = tree.getroot()
+    dictionary = {}
+    for child in root:
+        dictionary[child.tag] = child.text
+    return dictionary
