@@ -12,3 +12,4 @@ FLUSH PRIVILEGES;
 
 -- Optional: Show grants for the user
 SHOW GRANTS FOR 'Tissem'@'localhost';
+
