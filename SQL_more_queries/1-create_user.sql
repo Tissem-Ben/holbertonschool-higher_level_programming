@@ -1,6 +1,8 @@
--- This script creates the MySQL user `user_0d_1` with all privileges on the server.
+-- Create user_0d_1
+CREATE USER IF NOT EXISTS 'user_0d_1'@'localhost' IDENTIFIED BY 'user_0d_1_pwd';
 
-CREATE USER IF NOT EXISTS 'user_0d_1'@'localhost' IDENTIFIED BY 'User_0d1_Pwd!';
-GRANT ALL PRIVILEGES ON *.* TO 'user_0d_1'@'localhost' WITH GRANT OPTION;
+-- All privileges to user_0d_1
+GRANT ALL PRIVILEGES ON *.* TO 'user_0d_1'@'localhost';
+
+-- Flush privileges
 FLUSH PRIVILEGES;
-
