@@ -1,4 +1,4 @@
--- This SQL script retrieves the privileges of all users
+-- This script lists all privileges of the MySQL users user_0d_1 and user_0d_2 on your server
 SELECT 
     GRANTEE, 
     TABLE_CATALOG, 
@@ -6,4 +6,5 @@ SELECT
 FROM 
     information_schema.role_table_grants 
 WHERE 
-    GRANTEE != 'PUBLIC';
+    GRANTEE IN ('user_0d_1', 'user_0d_2');
+
