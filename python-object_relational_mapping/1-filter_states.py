@@ -3,12 +3,12 @@ import MySQLdb
 import sys
 
 if __name__ == "__main__":
-    # Retrieve connection arguments
+    # Récupération des arguments de connexion
     mysql_username = sys.argv[1]
     mysql_password = sys.argv[2]
     database_name = sys.argv[3]
 
-    # Connect to MySQL database
+    # Connexion à la base de données MySQL
     db = MySQLdb.connect(
         host="localhost",
         user=mysql_username,
@@ -16,19 +16,19 @@ if __name__ == "__main__":
         db=database_name
     )
 
-    # Create a cursor to execute queries
+    # Création d'un curseur pour exécuter des requêtes
     cursor = db.cursor()
 
-    # Execute query to select states starting with 'N'
+    # Exécution de la requête pour sélectionner les états dont le nom commence par 'N'
     cursor.execute(
         "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC;"
     )
 
-    # Fetch and print results
+    # Récupération et affichage des résultats
     rows = cursor.fetchall()
     for row in rows:
         print(row)
 
-    # Close the cursor and connection
+    # Fermeture du curseur et de la connexion
     cursor.close()
     db.close()
