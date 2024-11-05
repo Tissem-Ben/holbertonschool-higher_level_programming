@@ -2,13 +2,14 @@
 import MySQLdb
 import sys
 
+# Check if the script is being executed directly and not imported
 if __name__ == "__main__":
-    # Récupération des arguments de connexion
+    # Retrieve MySQL credentials and database name from command-line arguments
     mysql_username = sys.argv[1]
     mysql_password = sys.argv[2]
     database_name = sys.argv[3]
 
-    # Connexion à la base de données MySQL
+    # Establish a connection to the MySQL database using provided credentials
     db = MySQLdb.connect(
         host="localhost",
         user=mysql_username,
@@ -16,19 +17,19 @@ if __name__ == "__main__":
         db=database_name
     )
 
-    # Création d'un curseur pour exécuter des requêtes
+    # Create a cursor object to interact with the MySQL database
     cursor = db.cursor()
 
-    # Exécution de la requête pour sélectionner les états dont le nom commence par 'N'
+    # Select states starting with 'N', sorted by id
     cursor.execute(
-        "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC;"
-    )
+            "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
+            )
 
-    # Récupération et affichage des résultats
+    # Fetch all rows from the executed query and print each row
     rows = cursor.fetchall()
     for row in rows:
         print(row)
 
-    # Fermeture du curseur et de la connexion
+    # Close the cursor and database connection
     cursor.close()
     db.close()
