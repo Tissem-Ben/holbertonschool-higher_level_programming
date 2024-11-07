@@ -1,35 +1,28 @@
 #!/usr/bin/python3
+"""Shebang script"""
+
 import MySQLdb
 import sys
 
-# Check if the script is being executed directly and not imported
 if __name__ == "__main__":
-    # Retrieve MySQL credentials and database name from command-line arguments
-    mysql_username = sys.argv[1]
-    mysql_password = sys.argv[2]
-    database_name = sys.argv[3]
-
-    # Establish a connection to the MySQL database using provided credentials
+    """The main entry point of the script."""
     db = MySQLdb.connect(
         host="localhost",
-        user=mysql_username,
-        passwd=mysql_password,
-        db=database_name
+        port=3306,
+        user=sys.argv[1],
+        passwd=sys.argv[2],
+        db=sys.argv[3]
     )
 
-    # Create a cursor object to interact with the MySQL database
     cursor = db.cursor()
 
-    # Select states starting with 'N', sorted by id
-    cursor.execute(
-            "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
-            )
+    cursor.execute("SELECT * FROM states ORDER BY id ASC")
 
-    # Fetch all rows from the executed query and print each row
     rows = cursor.fetchall()
-    for row in rows:
-        print(row)
 
-    # Close the cursor and database connection
+    for row in rows:
+        if row[1][0] == 'N':
+            print(row)
+
     cursor.close()
     db.close()
