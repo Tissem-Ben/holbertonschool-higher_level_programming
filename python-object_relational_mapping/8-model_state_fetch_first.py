@@ -14,7 +14,8 @@ if __name__ == "__main__":
 
     # Create an engine to connect to the MySQL server
     engine = create_engine(
-        f'mysql+mysqldb://{mysql_username}:{mysql_password}@localhost:3306/{database_name}'
+        f'mysql+mysqldb://{mysql_username}:{mysql_password}'
+        f'@localhost:3306/{database_name}'
     )
 
     # Create a sessionmaker and bind it to the engine
